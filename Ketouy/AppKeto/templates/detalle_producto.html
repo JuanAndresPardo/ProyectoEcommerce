@@ -1,0 +1,18 @@
+{% extends "padre.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ producto.nombre }}</h1>
+    <img src="{{ producto.fotos.url }}" alt="{{ producto.nombre }}" class="img-thumbnail" width="400">
+    <p>Marca: {{ producto.marca }}</p>
+    <p>Peso en gramos: {{ producto.peso_gramos }}</p>
+    <p>Categoría: {{ producto.categoria }}</p>
+    <p>Precio: $ {{ producto.precio|floatformat:"2" }}</p>
+    <p>Descripción: {{ producto.descripcion }}</p>
+    <!-- Otros detalles del producto -->
+    
+    <!-- Botón para volver a la página anterior -->
+    <a class="btn btn-primary" href="javascript:history.back()">Atrás</a>
+</div>
+{% endblock %}

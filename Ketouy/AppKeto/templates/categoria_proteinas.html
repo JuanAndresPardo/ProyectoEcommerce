@@ -1,0 +1,78 @@
+{% extends "padre.html" %}
+{% load static %}
+
+<style>
+  .producto-card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+  }
+
+  .producto-card img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-bottom: 10px;
+  }
+
+  .producto-card h3 {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .producto-card p {
+    font-size: 1rem;
+  }
+
+  .producto-card button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .producto-card button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+{% block content %}
+  <h2>Proteínas</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Peso en gramos</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Fotos</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for producto in productos %}
+      <tr>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.marca }}</td>
+        <td>{{ producto.peso_gramos }}</td>
+        <td>{{ producto.categoria }}</td>
+        <td>${{ producto.precio|floatformat:"2" }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td><a href="{% url 'detalle_producto' producto.pk %}"><img src="{{ producto.fotos.url }}" alt="{{ producto.nombre }}" class="img-thumbnail" width="100"></a></td>
+        <td>
+          <button>Agregar al carrito</button>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="8">No hay productos en esta categoría.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

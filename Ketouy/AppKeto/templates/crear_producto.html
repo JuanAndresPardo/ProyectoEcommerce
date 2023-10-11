@@ -1,0 +1,35 @@
+{% extends 'padre.html' %}
+
+{% block content %}
+<h2>Crear Producto</h2>
+<form method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column;">
+  {% csrf_token %}
+  
+  <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+  {{ form.nombre }}
+  
+  <label for="{{ form.marca.id_for_label }}">Marca:</label>
+  {{ form.marca }}
+  
+  <label for="{{ form.peso_gramos.id_for_label }}">Peso en gramos:</label>
+  {{ form.peso_gramos }}
+  
+  <label for="{{ form.categoria.id_for_label }}">Categoría:</label>
+  <select name="{{ form.categoria.name }}">
+    {% for categoria in categorias %}
+    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+    {% endfor %}
+  </select>
+  
+  <label for="{{ form.precio.id_for_label }}">Precio:</label>
+  {{ form.precio }}
+  
+  <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
+  {{ form.descripcion }}
+  
+  <label for="{{ form.fotos.id_for_label }}">Fotos:</label>
+  {{ form.fotos }}
+  
+  <button type="submit">Guardar Producto</button>
+</form>
+{% endblock %}

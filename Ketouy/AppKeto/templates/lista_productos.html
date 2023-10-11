@@ -1,0 +1,41 @@
+{% extends 'padre.html' %}
+
+{% block content %}
+<h2>Lista de Productos</h2>
+<a href="{% url 'crear_producto' %}" class="btn btn-primary">Crear Producto</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Peso en gramos</th>
+      <th scope="col">Categoría</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Fotos</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for producto in productos %}
+    <tr>
+      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.marca }}</td>
+      <td>{{ producto.peso_gramos }}</td>
+      <td>{{ producto.categoria }}</td>
+      <td>{{ producto.precio }}</td>
+      <td>{{ producto.descripcion }}</td>
+      <td><img src="{{ producto.fotos.url }}" alt="{{ producto.nombre }}" class="img-thumbnail" width="100"></td>
+      <td>
+        <a href="{% url 'editar_producto' producto.pk %}" class="btn btn-primary btn-sm">Editar</a>
+        <a href="{% url 'eliminar_producto' producto.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="8">No hay productos disponibles.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
